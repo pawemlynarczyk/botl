@@ -1,0 +1,1007 @@
+2023-07-21 00:45:27,122 - INFO - Logger set up with log level: 20(info)
+2023-07-21 00:45:27,125 - INFO - Log file: logs/langflow.log
+2023-07-21 00:46:03,628 - ERROR - 1005
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/chat_manager.py", line 165, in handle_websocket
+    json_payload = await websocket.receive_json()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 133, in receive_json
+    self._raise_on_disconnect(message)
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 105, in _raise_on_disconnect
+    raise WebSocketDisconnect(message["code"])
+starlette.websockets.WebSocketDisconnect: 1005
+2023-07-21 00:46:03,739 - ERROR - Cannot call "send" once a close message has been sent.
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/chat_manager.py", line 165, in handle_websocket
+    json_payload = await websocket.receive_json()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 133, in receive_json
+    self._raise_on_disconnect(message)
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 105, in _raise_on_disconnect
+    raise WebSocketDisconnect(message["code"])
+starlette.websockets.WebSocketDisconnect: 1005
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/chat_manager.py", line 181, in handle_websocket
+    await self.active_connections[client_id].close(
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 180, in close
+    await self.send(
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 85, in send
+    await self._send(message)
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 65, in sender
+    await send(message)
+  File "/opt/homebrew/lib/python3.11/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 329, in asgi_send
+    raise RuntimeError(msg % message_type)
+RuntimeError: Unexpected ASGI message 'websocket.close', after sending 'websocket.close'.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/chat_manager.py", line 189, in handle_websocket
+    await connection.close(code=1000, reason="Client disconnected")
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 180, in close
+    await self.send(
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 87, in send
+    raise RuntimeError('Cannot call "send" once a close message has been sent.')
+RuntimeError: Cannot call "send" once a close message has been sent.
+2023-07-21 00:46:04,657 - ERROR - Node dndnode_24 not found
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 51, in post_validate_node
+    raise ValueError(f"Node {node_id} not found")
+ValueError: Node dndnode_24 not found
+2023-07-21 00:46:04,659 - ERROR - Node dndnode_30 not found
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 51, in post_validate_node
+    raise ValueError(f"Node {node_id} not found")
+ValueError: Node dndnode_30 not found
+2023-07-21 00:46:04,661 - ERROR - Node dndnode_31 not found
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 51, in post_validate_node
+    raise ValueError(f"Node {node_id} not found")
+ValueError: Node dndnode_31 not found
+2023-07-21 00:46:04,662 - ERROR - Node dndnode_32 not found
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 51, in post_validate_node
+    raise ValueError(f"Node {node_id} not found")
+ValueError: Node dndnode_32 not found
+2023-07-21 00:46:04,710 - ERROR - Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 195, in _build
+    self._built_object = loading.instantiate_class(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 41, in instantiate_class
+    return instantiate_based_on_type(class_object, base_type, node_type, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 83, in instantiate_based_on_type
+    return class_object(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langchain/load/serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 53, in post_validate_node
+    node.build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 123, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 201, in _build
+    raise ValueError(
+ValueError: Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+2023-07-21 00:46:04,719 - ERROR - Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 195, in _build
+    self._built_object = loading.instantiate_class(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 41, in instantiate_class
+    return instantiate_based_on_type(class_object, base_type, node_type, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 83, in instantiate_based_on_type
+    return class_object(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langchain/load/serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 53, in post_validate_node
+    node.build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 102, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 160, in _build
+    result = value.build()
+             ^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 123, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 201, in _build
+    raise ValueError(
+ValueError: Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+2023-07-21 00:46:15,887 - ERROR - Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 195, in _build
+    self._built_object = loading.instantiate_class(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 41, in instantiate_class
+    return instantiate_based_on_type(class_object, base_type, node_type, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 83, in instantiate_based_on_type
+    return class_object(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langchain/load/serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 53, in post_validate_node
+    node.build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 123, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 201, in _build
+    raise ValueError(
+ValueError: Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+2023-07-21 00:46:15,890 - ERROR - Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 195, in _build
+    self._built_object = loading.instantiate_class(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 41, in instantiate_class
+    return instantiate_based_on_type(class_object, base_type, node_type, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 83, in instantiate_based_on_type
+    return class_object(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langchain/load/serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 53, in post_validate_node
+    node.build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 102, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 160, in _build
+    result = value.build()
+             ^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 123, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 201, in _build
+    raise ValueError(
+ValueError: Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+2023-07-21 00:52:10,682 - INFO - Logger set up with log level: 20(info)
+2023-07-21 00:52:10,685 - INFO - Log file: logs/langflow.log
+2023-07-21 00:52:15,694 - ERROR - Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 195, in _build
+    self._built_object = loading.instantiate_class(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 41, in instantiate_class
+    return instantiate_based_on_type(class_object, base_type, node_type, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 83, in instantiate_based_on_type
+    return class_object(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langchain/load/serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 53, in post_validate_node
+    node.build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 102, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 160, in _build
+    result = value.build()
+             ^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 123, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 201, in _build
+    raise ValueError(
+ValueError: Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+2023-07-21 00:52:15,700 - ERROR - Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 195, in _build
+    self._built_object = loading.instantiate_class(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 41, in instantiate_class
+    return instantiate_based_on_type(class_object, base_type, node_type, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 83, in instantiate_based_on_type
+    return class_object(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langchain/load/serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 53, in post_validate_node
+    node.build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 123, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 201, in _build
+    raise ValueError(
+ValueError: Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+2023-07-21 00:52:17,551 - ERROR - Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 195, in _build
+    self._built_object = loading.instantiate_class(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 41, in instantiate_class
+    return instantiate_based_on_type(class_object, base_type, node_type, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 83, in instantiate_based_on_type
+    return class_object(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langchain/load/serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 53, in post_validate_node
+    node.build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 123, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 201, in _build
+    raise ValueError(
+ValueError: Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+2023-07-21 00:52:17,554 - ERROR - Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 195, in _build
+    self._built_object = loading.instantiate_class(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 41, in instantiate_class
+    return instantiate_based_on_type(class_object, base_type, node_type, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 83, in instantiate_based_on_type
+    return class_object(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langchain/load/serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 53, in post_validate_node
+    node.build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 102, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 160, in _build
+    result = value.build()
+             ^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 123, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 201, in _build
+    raise ValueError(
+ValueError: Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+2023-07-21 00:53:09,481 - ERROR - Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 195, in _build
+    self._built_object = loading.instantiate_class(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 41, in instantiate_class
+    return instantiate_based_on_type(class_object, base_type, node_type, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 83, in instantiate_based_on_type
+    return class_object(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langchain/load/serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 53, in post_validate_node
+    node.build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 123, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 201, in _build
+    raise ValueError(
+ValueError: Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+2023-07-21 00:53:09,483 - ERROR - Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 195, in _build
+    self._built_object = loading.instantiate_class(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 41, in instantiate_class
+    return instantiate_based_on_type(class_object, base_type, node_type, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 83, in instantiate_based_on_type
+    return class_object(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langchain/load/serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 53, in post_validate_node
+    node.build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 102, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 160, in _build
+    result = value.build()
+             ^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 123, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 201, in _build
+    raise ValueError(
+ValueError: Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+2023-07-21 00:53:18,626 - ERROR - Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 195, in _build
+    self._built_object = loading.instantiate_class(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 41, in instantiate_class
+    return instantiate_based_on_type(class_object, base_type, node_type, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 83, in instantiate_based_on_type
+    return class_object(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langchain/load/serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 53, in post_validate_node
+    node.build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 123, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 201, in _build
+    raise ValueError(
+ValueError: Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+2023-07-21 00:53:18,629 - ERROR - Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 195, in _build
+    self._built_object = loading.instantiate_class(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 41, in instantiate_class
+    return instantiate_based_on_type(class_object, base_type, node_type, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 83, in instantiate_based_on_type
+    return class_object(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langchain/load/serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 53, in post_validate_node
+    node.build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 102, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 160, in _build
+    result = value.build()
+             ^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 123, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 201, in _build
+    raise ValueError(
+ValueError: Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+2023-07-21 00:53:19,416 - ERROR - 1005
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/chat_manager.py", line 165, in handle_websocket
+    json_payload = await websocket.receive_json()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 133, in receive_json
+    self._raise_on_disconnect(message)
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 105, in _raise_on_disconnect
+    raise WebSocketDisconnect(message["code"])
+starlette.websockets.WebSocketDisconnect: 1005
+2023-07-21 00:53:19,473 - ERROR - Cannot call "send" once a close message has been sent.
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/chat_manager.py", line 165, in handle_websocket
+    json_payload = await websocket.receive_json()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 133, in receive_json
+    self._raise_on_disconnect(message)
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 105, in _raise_on_disconnect
+    raise WebSocketDisconnect(message["code"])
+starlette.websockets.WebSocketDisconnect: 1005
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/chat_manager.py", line 181, in handle_websocket
+    await self.active_connections[client_id].close(
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 180, in close
+    await self.send(
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 85, in send
+    await self._send(message)
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 65, in sender
+    await send(message)
+  File "/opt/homebrew/lib/python3.11/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 329, in asgi_send
+    raise RuntimeError(msg % message_type)
+RuntimeError: Unexpected ASGI message 'websocket.close', after sending 'websocket.close'.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/chat_manager.py", line 189, in handle_websocket
+    await connection.close(code=1000, reason="Client disconnected")
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 180, in close
+    await self.send(
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 87, in send
+    raise RuntimeError('Cannot call "send" once a close message has been sent.')
+RuntimeError: Cannot call "send" once a close message has been sent.
+2023-07-21 00:53:20,438 - ERROR - Node dndnode_6761ecb5-568f-4555-9062-320f7eaf92a9 not found
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 51, in post_validate_node
+    raise ValueError(f"Node {node_id} not found")
+ValueError: Node dndnode_6761ecb5-568f-4555-9062-320f7eaf92a9 not found
+2023-07-21 00:53:20,439 - ERROR - Node dndnode_5f71e88e-73f3-48ce-843e-4e412bcacad6 not found
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 51, in post_validate_node
+    raise ValueError(f"Node {node_id} not found")
+ValueError: Node dndnode_5f71e88e-73f3-48ce-843e-4e412bcacad6 not found
+2023-07-21 00:53:20,440 - ERROR - Node dndnode_a957d16e-050c-4d2e-8cab-a457b4485c70 not found
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 51, in post_validate_node
+    raise ValueError(f"Node {node_id} not found")
+ValueError: Node dndnode_a957d16e-050c-4d2e-8cab-a457b4485c70 not found
+2023-07-21 00:53:20,441 - ERROR - Node dndnode_fab60654-840b-4210-8a73-9355a9c0573e not found
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 51, in post_validate_node
+    raise ValueError(f"Node {node_id} not found")
+ValueError: Node dndnode_fab60654-840b-4210-8a73-9355a9c0573e not found
+2023-07-21 00:53:21,215 - ERROR - 1005
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/chat_manager.py", line 165, in handle_websocket
+    json_payload = await websocket.receive_json()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 133, in receive_json
+    self._raise_on_disconnect(message)
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 105, in _raise_on_disconnect
+    raise WebSocketDisconnect(message["code"])
+starlette.websockets.WebSocketDisconnect: 1005
+2023-07-21 00:53:21,274 - ERROR - Cannot call "send" once a close message has been sent.
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/chat_manager.py", line 165, in handle_websocket
+    json_payload = await websocket.receive_json()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 133, in receive_json
+    self._raise_on_disconnect(message)
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 105, in _raise_on_disconnect
+    raise WebSocketDisconnect(message["code"])
+starlette.websockets.WebSocketDisconnect: 1005
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/chat_manager.py", line 181, in handle_websocket
+    await self.active_connections[client_id].close(
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 180, in close
+    await self.send(
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 85, in send
+    await self._send(message)
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 65, in sender
+    await send(message)
+  File "/opt/homebrew/lib/python3.11/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 329, in asgi_send
+    raise RuntimeError(msg % message_type)
+RuntimeError: Unexpected ASGI message 'websocket.close', after sending 'websocket.close'.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/chat_manager.py", line 189, in handle_websocket
+    await connection.close(code=1000, reason="Client disconnected")
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 180, in close
+    await self.send(
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 87, in send
+    raise RuntimeError('Cannot call "send" once a close message has been sent.')
+RuntimeError: Cannot call "send" once a close message has been sent.
+2023-07-21 00:53:22,242 - ERROR - Node dndnode_24 not found
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 51, in post_validate_node
+    raise ValueError(f"Node {node_id} not found")
+ValueError: Node dndnode_24 not found
+2023-07-21 00:53:22,243 - ERROR - Node dndnode_30 not found
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 51, in post_validate_node
+    raise ValueError(f"Node {node_id} not found")
+ValueError: Node dndnode_30 not found
+2023-07-21 00:53:22,244 - ERROR - Node dndnode_32 not found
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 51, in post_validate_node
+    raise ValueError(f"Node {node_id} not found")
+ValueError: Node dndnode_32 not found
+2023-07-21 00:53:22,245 - ERROR - Node dndnode_31 not found
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 51, in post_validate_node
+    raise ValueError(f"Node {node_id} not found")
+ValueError: Node dndnode_31 not found
+2023-07-21 00:53:22,287 - ERROR - Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 195, in _build
+    self._built_object = loading.instantiate_class(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 41, in instantiate_class
+    return instantiate_based_on_type(class_object, base_type, node_type, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 83, in instantiate_based_on_type
+    return class_object(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langchain/load/serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 53, in post_validate_node
+    node.build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 123, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 201, in _build
+    raise ValueError(
+ValueError: Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+2023-07-21 00:53:22,288 - ERROR - Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 195, in _build
+    self._built_object = loading.instantiate_class(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 41, in instantiate_class
+    return instantiate_based_on_type(class_object, base_type, node_type, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 83, in instantiate_based_on_type
+    return class_object(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langchain/load/serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 53, in post_validate_node
+    node.build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 102, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 160, in _build
+    result = value.build()
+             ^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 123, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 201, in _build
+    raise ValueError(
+ValueError: Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+2023-07-21 00:53:23,711 - ERROR - Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 195, in _build
+    self._built_object = loading.instantiate_class(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 41, in instantiate_class
+    return instantiate_based_on_type(class_object, base_type, node_type, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 83, in instantiate_based_on_type
+    return class_object(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langchain/load/serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 53, in post_validate_node
+    node.build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 123, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 201, in _build
+    raise ValueError(
+ValueError: Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+2023-07-21 00:53:23,715 - ERROR - Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 195, in _build
+    self._built_object = loading.instantiate_class(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 41, in instantiate_class
+    return instantiate_based_on_type(class_object, base_type, node_type, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 83, in instantiate_based_on_type
+    return class_object(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langchain/load/serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 53, in post_validate_node
+    node.build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 102, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 160, in _build
+    result = value.build()
+             ^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 123, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 201, in _build
+    raise ValueError(
+ValueError: Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+2023-07-21 00:53:27,953 - ERROR - Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 195, in _build
+    self._built_object = loading.instantiate_class(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 41, in instantiate_class
+    return instantiate_based_on_type(class_object, base_type, node_type, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 83, in instantiate_based_on_type
+    return class_object(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langchain/load/serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 53, in post_validate_node
+    node.build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 123, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 201, in _build
+    raise ValueError(
+ValueError: Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+2023-07-21 00:53:27,958 - ERROR - Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 195, in _build
+    self._built_object = loading.instantiate_class(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 41, in instantiate_class
+    return instantiate_based_on_type(class_object, base_type, node_type, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 83, in instantiate_based_on_type
+    return class_object(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langchain/load/serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 53, in post_validate_node
+    node.build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 102, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 160, in _build
+    result = value.build()
+             ^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 123, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 201, in _build
+    raise ValueError(
+ValueError: Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+2023-07-21 00:53:32,257 - ERROR - Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 195, in _build
+    self._built_object = loading.instantiate_class(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 41, in instantiate_class
+    return instantiate_based_on_type(class_object, base_type, node_type, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 83, in instantiate_based_on_type
+    return class_object(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langchain/load/serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 53, in post_validate_node
+    node.build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 123, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 201, in _build
+    raise ValueError(
+ValueError: Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+2023-07-21 00:53:32,261 - ERROR - Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 195, in _build
+    self._built_object = loading.instantiate_class(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 41, in instantiate_class
+    return instantiate_based_on_type(class_object, base_type, node_type, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 83, in instantiate_based_on_type
+    return class_object(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langchain/load/serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 53, in post_validate_node
+    node.build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 102, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 160, in _build
+    result = value.build()
+             ^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 123, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 201, in _build
+    raise ValueError(
+ValueError: Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+2023-07-21 00:53:34,409 - ERROR - Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 195, in _build
+    self._built_object = loading.instantiate_class(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 41, in instantiate_class
+    return instantiate_based_on_type(class_object, base_type, node_type, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 83, in instantiate_based_on_type
+    return class_object(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langchain/load/serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 53, in post_validate_node
+    node.build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 123, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 201, in _build
+    raise ValueError(
+ValueError: Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+2023-07-21 00:53:34,415 - ERROR - Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 195, in _build
+    self._built_object = loading.instantiate_class(
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 41, in instantiate_class
+    return instantiate_based_on_type(class_object, base_type, node_type, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/interface/loading.py", line 83, in instantiate_based_on_type
+    return class_object(**params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langchain/load/serializable.py", line 74, in __init__
+    super().__init__(**kwargs)
+  File "pydantic/main.py", line 341, in pydantic.main.BaseModel.__init__
+pydantic.error_wrappers.ValidationError: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/validate.py", line 53, in post_validate_node
+    node.build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 102, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 160, in _build
+    result = value.build()
+             ^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/nodes.py", line 123, in build
+    self._build()
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/graph/base.py", line 201, in _build
+    raise ValueError(
+ValueError: Error building node ChatOpenAI: 1 validation error for ChatOpenAI
+__root__
+  Did not find openai_api_key, please add an environment variable `OPENAI_API_KEY` which contains it, or pass  `openai_api_key` as a named parameter. (type=value_error)
+2023-07-21 00:56:59,160 - ERROR - 1001
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/chat_manager.py", line 165, in handle_websocket
+    json_payload = await websocket.receive_json()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 133, in receive_json
+    self._raise_on_disconnect(message)
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 105, in _raise_on_disconnect
+    raise WebSocketDisconnect(message["code"])
+starlette.websockets.WebSocketDisconnect: 1001
+2023-07-21 00:56:59,211 - ERROR - Cannot call "send" once a close message has been sent.
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/chat_manager.py", line 165, in handle_websocket
+    json_payload = await websocket.receive_json()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 133, in receive_json
+    self._raise_on_disconnect(message)
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 105, in _raise_on_disconnect
+    raise WebSocketDisconnect(message["code"])
+starlette.websockets.WebSocketDisconnect: 1001
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/chat_manager.py", line 181, in handle_websocket
+    await self.active_connections[client_id].close(
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 180, in close
+    await self.send(
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 85, in send
+    await self._send(message)
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 65, in sender
+    await send(message)
+  File "/opt/homebrew/lib/python3.11/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 329, in asgi_send
+    raise RuntimeError(msg % message_type)
+RuntimeError: Unexpected ASGI message 'websocket.close', after sending 'websocket.close'.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/homebrew/lib/python3.11/site-packages/langflow/api/chat_manager.py", line 189, in handle_websocket
+    await connection.close(code=1000, reason="Client disconnected")
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 180, in close
+    await self.send(
+  File "/opt/homebrew/lib/python3.11/site-packages/starlette/websockets.py", line 87, in send
+    raise RuntimeError('Cannot call "send" once a close message has been sent.')
+RuntimeError: Cannot call "send" once a close message has been sent.
